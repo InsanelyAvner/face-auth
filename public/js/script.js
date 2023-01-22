@@ -43,6 +43,8 @@ $.getScript( "./js/face-api.min.js" )
     }
     
     async function recognizeFaces() {
+
+        console.log("Detecting face")
     
         const labeledDescriptors = await loadLabeledImages()
         // console.log(labeledDescriptors)
