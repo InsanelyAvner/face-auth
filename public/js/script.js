@@ -78,9 +78,12 @@ $.getScript( "./js/face-api.min.js" )
                         // console.log(numDetections)
                     }
         
-                    if (numDetections >= 30) {
+                    if (numDetections == 20) {
                         // Avner Detected
                         firebase.database().ref(authId).set({status: "success"});
+                    }
+
+                    if (numDetections == 30) {
                         throw BreakError;
                     }
                 }) 
