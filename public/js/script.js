@@ -36,6 +36,7 @@ $.getScript( "./js/face-api.min.js" )
                 stream => video.srcObject = stream,
                 err => console.error(err)
             )
+            console.log("video added")
             
             resolve()
         }) 
