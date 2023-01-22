@@ -95,8 +95,7 @@ $.getScript( "./js/face-api.min.js" )
     
     
     function loadLabeledImages() {
-        //const labels = ['Black Widow', 'Captain America', 'Hawkeye' , 'Jim Rhodes', 'Tony Stark', 'Thor', 'Captain Marvel']
-        const labels = ['Avner', 'Mama',] // for WebCam
+        const labels = ['Avner', 'Mama', "Avner"] // for WebCam
         return Promise.all(
             labels.map(async (label)=>{
                 const descriptions = []
