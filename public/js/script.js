@@ -68,21 +68,25 @@ $.getScript( "./js/face-api.min.js" )
             const results = resizedDetections.map((d) => {
                 return faceMatcher.findBestMatch(d.descriptor)
             })
-            results.forEach( (result, i) => {
-                const box = resizedDetections[i].detection.box
-                const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
-                drawBox.draw(canvas)
-                if (result._label == "Avner") {
-                    numDetections++
-                    // console.log(numDetections)
-                }
-    
-                if (numDetections >= 30) {
-                    // Avner Detected
-                    firebase.database().ref(authId).set({status: "success"});
-                    setTimeout(window.close(), 2000)
-                }
-            })
+            try {
+                results.forEach( (result, i) => {
+                    const box = resizedDetections[i].detection.box
+                    const drawBox = new faceapi.draw.DrawBox(box, { label: result.toString() })
+                    drawBox.draw(canvas)
+                    if (result._label == "Avner") {
+                        numDetections++
+                        // console.log(numDetections)
+                    }
+        
+                    if (numDetections >= 30) {
+                        // Avner Detected
+                        firebase.database().ref(authId).set({status: "success"});
+                        throw BreakError;
+                    }
+                }) 
+            } catch (err) {
+                window.close()
+            }
         }, 100)
     }
     
