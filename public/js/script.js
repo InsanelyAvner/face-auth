@@ -30,15 +30,15 @@ $.getScript( "./js/face-api.min.js" )
     })
     
     function start() {
-        return new Promise((resolve) => {
-            navigator.getUserMedia(
+        return new Promise(async (resolve) => {
+            await navigator.getUserMedia(
                 { video:{} },
-                stream => video.srcObject = stream,
+                stream => {
+                    video.srcObject = stream;
+                    resolve()
+                },
                 err => console.error(err)
             )
-            console.log("video added")
-            
-            resolve()
         }) 
     }
     
