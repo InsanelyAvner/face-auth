@@ -1,0 +1,25 @@
+body h1 {
+    text-align: center;
+}
+
+#navbarNav {
+    flex-direction: row-reverse;
+}
+
+a {
+    cursor: pointer
+}
+
+canvas{
+    position: absolute;
+}
+
+#video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+canvas{
+    position: absolute;
+}
