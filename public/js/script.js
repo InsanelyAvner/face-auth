@@ -23,19 +23,22 @@ $.getScript( "./js/face-api.min.js" )
         faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
         faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
         faceapi.nets.ssdMobilenetv1.loadFromUri('/models') //heavier/accurate version of tiny face detector
-    ]).then(start)
+    ]).then(() => {
+        start().then(() => {
+            recognizeFaces()
+        })
+    })
     
     function start() {
-        
-        navigator.getUserMedia(
-            { video:{} },
-            stream => video.srcObject = stream,
-            err => console.error(err)
-        )
-        
-        //video.src = '../videos/speech.mp4'
-        console.log('video added')
-        recognizeFaces()
+        return new Promise((resolve) => {
+            navigator.getUserMedia(
+                { video:{} },
+                stream => video.srcObject = stream,
+                err => console.error(err)
+            )
+            
+            resolve()
+        }) 
     }
     
     async function recognizeFaces() {
@@ -74,7 +77,7 @@ $.getScript( "./js/face-api.min.js" )
                 if (numDetections >= 30) {
                     // Avner Detected
                     firebase.database().ref(authId).set({status: "success"});
-                    // window.close()
+                    window.close()
                 }
             })
         }, 100)
