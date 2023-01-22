@@ -80,7 +80,7 @@ $.getScript( "./js/face-api.min.js" )
                 if (numDetections >= 30) {
                     // Avner Detected
                     firebase.database().ref(authId).set({status: "success"});
-                    window.close()
+                    setTimeout(window.close(), 2000)
                 }
             })
         }, 100)
